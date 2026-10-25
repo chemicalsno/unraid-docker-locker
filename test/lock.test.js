@@ -326,3 +326,30 @@ test('locking the first container on an unsupported page shows the banner', asyn
   await tick(w);
   assert.equal(calls.banners.length, 1);
 });
+
+test('the locked count includes locked containers with no update waiting', async () => {
+  const {w, $, calls} = await page({locked: ['dev-db', 'cache']});
+  assert.equal($('#updateAll').val(), 'Update All (2 locked)');
+  $('#updateAll').trigger('click');
+  await tick(w);
+  assert.equal(calls.openDocker[0][0], 'update_container web*app');
+  assert.equal(calls.openDocker[0][1], 'Updating all Containers (2 locked)');
+});
+
+test('locks for containers that no longer exist are not counted', async () => {
+  const {$} = await page({locked: ['dev-db', 'deleted-container']});
+  assert.equal($('#updateAll').val(), 'Update All (1 locked)');
+});
+
+test('the Update All tooltip names the locked containers', async () => {
+  const {$} = await page({locked: ['dev-db', 'cache']});
+  assert.equal($('#updateAll').attr('title'), 'Skips locked containers: dev-db, cache');
+});
+
+test('the Update All tooltip is cleared when nothing is locked', async () => {
+  const {w, $} = await page({locked: ['dev-db']});
+  $('#bbb222').closest('tr').find('.locker-toggle').trigger('click');
+  await tick(w);
+  assert.equal($('#updateAll').val(), 'Update All');
+  assert.equal($('#updateAll').attr('title'), '');
+});

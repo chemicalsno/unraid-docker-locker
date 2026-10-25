@@ -31,7 +31,7 @@ Docker Locker adds a lock toggle to every container on the **Docker** page. **Up
 ## Features
 
 - **Lock toggle on every container.** Locked containers show an orange **locked** label in the update column. Unlocked containers show a grey **lock** link.
-- **Update All skips locked containers.** The button shows how many containers it skips, for example **Update All (2 locked)**.
+- **Update All skips locked containers.** The button shows how many containers are locked, for example **Update All (2 locked)**. To see which ones, hover over the button.
 - **Single updates ask first.** If you update a locked container from its **apply update** link, from the right-click menu on the **Docker** page, or from the container menu on the **Dashboard**, a warning asks you to confirm.
 - **Locks stay current across browser tabs.** Before any update, the plugin reads the lock list from the server, so a lock that you set in another tab still applies.
 - **Locks persist.** Locks are stored on the flash drive and survive reboots, plugin updates, and reinstalls.
@@ -83,7 +83,7 @@ The label changes to an orange **locked**. To unlock the container, click **lock
 
 ### Update everything except locked containers
 
-Click **Update All** at the bottom of the **Docker** page. The update window title shows how many containers were skipped, for example **Updating all Containers (2 locked)**.
+Click **Update All** at the bottom of the **Docker** page. The button and the update window title show how many containers are locked, for example **Updating all Containers (2 locked)**. The count includes every locked container, whether or not it has an update waiting.
 
 If every container with a pending update is locked, **Update All** is disabled.
 
