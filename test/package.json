@@ -1,0 +1,13 @@
+{
+  "name": "docker-locker-tests",
+  "private": true,
+  "description": "Tests for the docker.locker Unraid plugin",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "jquery": "3.7.1",
+    "jsdom": "30.1.3"
+  }
+}
