@@ -26,8 +26,8 @@ jobs:
       - name: Install xmllint and PHP
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils php-cli
 
-      - name: Check that the .plg is well-formed XML
-        run: xmllint --noout docker.locker.plg
+      - name: Check that the .plg and Community Applications files are well-formed XML
+        run: xmllint --noout docker.locker.plg ca_profile.xml plugins/*.xml
 
       - name: Check PHP syntax
         run: |

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Plugin>
+  <Name>Docker Locker</Name>
+  <Overview>Lock the Docker containers you don't want updated, then use Update All for everything else. Docker Locker adds a lock toggle to every container on the Docker page. Update All skips locked containers and shows how many it skipped, and updating a locked container on its own from the Docker page or the Dashboard asks you to confirm first. Locks are stored on the flash drive and survive reboots. Locks apply only to updates started from the web UI: CA Auto Update Applications, Docker Compose tools, and the update_container script ignore them.</Overview>
+  <PluginURL>https://raw.githubusercontent.com/chemicalsno/unraid-docker-locker/main/docker.locker.plg</PluginURL>
+  <PluginAuthor>chemicalsno</PluginAuthor>
+  <Support>https://github.com/chemicalsno/unraid-docker-locker/issues</Support>
+  <Project>https://github.com/chemicalsno/unraid-docker-locker</Project>
+  <ReadMe>https://raw.githubusercontent.com/chemicalsno/unraid-docker-locker/main/README.md</ReadMe>
+  <Category>Tools:Utilities</Category>
+  <MinVer>7.3.0</MinVer>
+  <Icon>https://raw.githubusercontent.com/chemicalsno/unraid-docker-locker/main/docs/images/icon.png</Icon>
+  <License>GPL-2.0</License>
+  <Screenshot>https://raw.githubusercontent.com/chemicalsno/unraid-docker-locker/main/docs/images/locked-row.png</Screenshot>
+  <ExtraSearchTerms>docker container update lock skip exclude hold freeze pin</ExtraSearchTerms>
+</Plugin>

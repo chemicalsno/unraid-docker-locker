@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <Profile>Unraid plugins by chemicalsno. This repository publishes **Docker Locker**, which adds a lock toggle to each container on the Docker page so Update All skips the containers you lock. Report problems or ask questions on GitHub: https://github.com/chemicalsno/unraid-docker-locker/issues</Profile>
+  <Icon>https://raw.githubusercontent.com/chemicalsno/unraid-docker-locker/main/docs/images/icon.png</Icon>
+  <WebPage>https://github.com/chemicalsno/unraid-docker-locker</WebPage>
+</CommunityApplications>
