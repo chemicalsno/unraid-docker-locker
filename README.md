@@ -3,6 +3,7 @@
 <img src="docs/images/icon.png" alt="Docker Locker icon: a blue shipping container with a yellow padlock" width="128">
 
 [![Test](https://github.com/chemicalsno/unraid-docker-locker/actions/workflows/test.yml/badge.svg)](https://github.com/chemicalsno/unraid-docker-locker/actions/workflows/test.yml)
+[![Latest release](https://img.shields.io/github/v/release/chemicalsno/unraid-docker-locker)](https://github.com/chemicalsno/unraid-docker-locker/releases/latest)
 [![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue)](LICENSE)
 [![Unraid 7.3+](https://img.shields.io/badge/Unraid-7.3%2B-orange)](#requirements)
 
