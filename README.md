@@ -26,6 +26,7 @@ Docker Locker adds a lock toggle to every container on the **Docker** page. **Up
 - [How it works](#how-it-works)
 - [Development](#development)
 - [Changelog](#changelog)
+- [Disclaimer](#disclaimer)
 - [License](#license)
 
 ## Features
@@ -35,13 +36,13 @@ Docker Locker adds a lock toggle to every container on the **Docker** page. **Up
 - **Single updates ask first.** If you update a locked container from its **apply update** link, from the right-click menu on the **Docker** page, or from the container menu on the **Dashboard**, a warning asks you to confirm.
 - **Locks stay current across browser tabs.** Before any update, the plugin reads the lock list from the server, so a lock that you set in another tab still applies.
 - **Locks persist.** Locks are stored on the flash drive and survive reboots, plugin updates, and reinstalls.
-- **Fails closed.** If a future Unraid release changes the code that the plugin depends on, the plugin stops modifying **Update All** and disables it while any container is locked. If the **Docker** page changes so much that the plugin can't attach to it, a warning banner says that locks may not apply.
+- **Designed to fail closed.** If a future Unraid release changes the code that the plugin depends on, the plugin is designed to stop modifying **Update All** and disable it while any container is locked. If the **Docker** page changes so much that the plugin can't attach to it, a warning banner says that locks may not apply.
 
 ![Update All button showing one locked container](docs/images/update-all-button.png)
 
 ## Requirements
 
-- Unraid 7.3.0 or later. The plugin was tested on Unraid 7.3.3 and 7.3.4. Unraid 7.4 betas aren't tested. If a beta changes the code the plugin depends on, the plugin disables **Update All** while containers are locked and shows a warning banner, so locked containers aren't updated without warning.
+- Unraid 7.3.0 or later. The plugin was tested on Unraid 7.3.3 and 7.3.4. Unraid 7.4 betas aren't tested. If a beta changes the code the plugin depends on, the plugin is designed to disable **Update All** while containers are locked and show a warning banner, to help prevent locked containers from being updated without warning.
 - Containers managed by Unraid's Docker page (containers created from an Unraid template). Unraid's own update routine can't update Docker Compose containers, so locks have no effect on them.
 
 ## Install
@@ -141,7 +142,7 @@ rm -r /boot/config/plugins/docker.locker
 
 ### Update All is disabled and shows a warning
 
-If you hover over **Update All** and see "Docker Locker does not support this Unraid version", your Unraid release changed the code that the plugin depends on. The plugin disables **Update All** while any container is locked so that it can't update a locked container. To use **Update All**, unlock all containers or check for a plugin update.
+If you hover over **Update All** and see "Docker Locker does not support this Unraid version", your Unraid release changed the code that the plugin depends on. The plugin disables **Update All** while any container is locked to help keep it from updating a locked container. To use **Update All**, unlock all containers or check for a plugin update.
 
 ### A banner says Docker Locker doesn't support this version of Unraid
 
@@ -232,6 +233,10 @@ Installed copies check the `.plg` on the `main` branch for updates, so anything 
 ## Changelog
 
 See the `<CHANGES>` section of [`docker.locker.plg`](docker.locker.plg). The **Installed Plugins** page shows the same changelog.
+
+## Disclaimer
+
+A locked container stays on its current image, so it doesn't get the security fixes or bug fixes in newer images. You're responsible for checking locked containers and updating them when needed. Docker Locker is provided as is, without warranty of any kind. See sections 11 and 12 of the [license](LICENSE).
 
 ## License
 
