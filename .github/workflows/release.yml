@@ -1,0 +1,39 @@
+name: Release
+
+# Publishes a GitHub release whenever main has a plugin version that hasn't been
+# released yet. Pushes that don't change the version do nothing.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Publish a release for a new version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(node release/plg.mjs version docker.locker.plg)
+          if gh release view "$version" >/dev/null 2>&1; then
+            echo "Version $version is already released."
+            exit 0
+          fi
+          previous=$(gh release list --exclude-drafts --limit 1 --json tagName --jq '.[0].tagName // ""')
+          node release/plg.mjs notes docker.locker.plg "$previous" > "$RUNNER_TEMP/notes.md"
+          gh release create "$version" --target "$GITHUB_SHA" --title "Docker Locker $version" \
+            --notes-file "$RUNNER_TEMP/notes.md" docker.locker.plg

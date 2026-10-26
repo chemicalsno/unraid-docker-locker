@@ -225,13 +225,9 @@ Before you install a changed `.plg` file on a server, increase the `version` ent
 
 Installed copies check the `.plg` on the `main` branch for updates, so anything merged into `main` is offered to every user as an update. Make changes on a separate branch, and merge them into `main` through a pull request once the tests pass and the change is ready to ship.
 
-1. On your branch, increase the `version` entity in `docker.locker.plg` and add an entry to its `<CHANGES>` section.
-2. Open a pull request into `main` and merge it after the **Test** check passes.
-3. Publish a GitHub release for the new version, with `docker.locker.plg` attached:
-
-   ```bash
-   gh release create <version> --target main --title "Docker Locker <version>" --notes-file <notes.md> docker.locker.plg
-   ```
+1. On your branch, increase the `version` entity in `docker.locker.plg` and add an entry for it to the `<CHANGES>` section. Versions use Unraid's date format, `YYYY.MM.DD`, with a letter for later releases on the same day, such as `2026.10.25c`.
+2. Open a pull request into `main`. The **Test** check fails if the pull request changes `docker.locker.plg` without increasing the version or adding a `<CHANGES>` entry. Unraid compares versions as text, and offers an update only when the new version sorts after the installed one.
+3. Merge the pull request after the checks pass. The **Release** workflow publishes a GitHub release for the new version, with `docker.locker.plg` attached and notes taken from the `<CHANGES>` entries since the previous release.
 
 ## Changelog
 

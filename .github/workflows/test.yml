@@ -43,3 +43,17 @@ jobs:
       - name: Run tests against Unraid 7.3
         working-directory: test
         run: npm test
+
+      # Installed copies only see a change as an update if the version goes up.
+      - name: Check the version was increased
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git fetch --depth=1 origin "$BASE_REF"
+          if git diff --quiet "origin/$BASE_REF" -- docker.locker.plg; then
+            echo "docker.locker.plg is unchanged, so no version bump is needed."
+          else
+            git show "origin/$BASE_REF:docker.locker.plg" > "$RUNNER_TEMP/base.plg"
+            node release/plg.mjs check-bump "$RUNNER_TEMP/base.plg" docker.locker.plg
+          fi
