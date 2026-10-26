@@ -191,6 +191,8 @@ npm install
 npm test
 ```
 
+The tests pin jQuery 3.7.1 because that's the version Unraid bundles in `dynamix.js`. Don't upgrade it on its own: if Unraid moves to a newer jQuery, the **Watch Unraid** workflow flags it, and the pin should follow.
+
 To check the plugin against a different Unraid release, point `DOCKER_JS` at that release's `docker.js`:
 
 ```bash

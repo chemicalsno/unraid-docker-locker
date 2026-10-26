@@ -90,6 +90,14 @@
         "ab888e3fe140bb5f5e3b7caf9ebdfc227a58db5f",
         "add045ddde5c0dc9f15aa7072a335959de6cf8e6"
       ]
+    },
+    "emhttp/plugins/dynamix/javascript/dynamix.js": {
+      "anchors": [
+        "jQuery v3.7.1"
+      ],
+      "reviewed": [
+        "31059cd4691ef0a9a7e27c006d0a23fa3cdaca72"
+      ]
     }
   }
 }
