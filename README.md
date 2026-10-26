@@ -41,7 +41,7 @@ Docker Locker adds a lock toggle to every container on the **Docker** page. **Up
 
 ## Requirements
 
-- Unraid 7.3.0 or later. The plugin was tested on Unraid 7.3.3.
+- Unraid 7.3.0 or later. The plugin was tested on Unraid 7.3.3 and 7.3.4. Unraid 7.4 betas aren't tested. If a beta changes the code the plugin depends on, the plugin disables **Update All** while containers are locked and shows a warning banner, so locked containers aren't updated without warning.
 - Containers managed by Unraid's Docker page (containers created from an Unraid template). Unraid's own update routine can't update Docker Compose containers, so locks have no effect on them.
 
 ## Install
@@ -220,6 +220,18 @@ node upstream/check.mjs --accept
 Both commands work without a GitHub token, but GitHub then allows only 60 API requests an hour. To use your token, prefix the command with `GITHUB_TOKEN=$(gh auth token)`.
 
 Before you install a changed `.plg` file on a server, increase the `version` entity at the top of the file. The Unraid plugin installer skips a reinstall when the version doesn't change, unless you run `plugin install <file> forced`.
+
+### Releasing a change
+
+Installed copies check the `.plg` on the `main` branch for updates, so anything merged into `main` is offered to every user as an update. Make changes on a separate branch, and merge them into `main` through a pull request once the tests pass and the change is ready to ship.
+
+1. On your branch, increase the `version` entity in `docker.locker.plg` and add an entry to its `<CHANGES>` section.
+2. Open a pull request into `main` and merge it after the **Test** check passes.
+3. Publish a GitHub release for the new version, with `docker.locker.plg` attached:
+
+   ```bash
+   gh release create <version> --target main --title "Docker Locker <version>" --notes-file <notes.md> docker.locker.plg
+   ```
 
 ## Changelog
 

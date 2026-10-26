@@ -1,0 +1,50 @@
+name: Bug report
+description: Something in Docker Locker doesn't work as expected.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. The details below make it possible to reproduce it.
+  - type: input
+    id: unraid-version
+    attributes:
+      label: Unraid version
+      description: Shown at the top left of the Unraid web UI, for example 7.3.4.
+    validations:
+      required: true
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Docker Locker version
+      description: Shown on **Plugins > Installed Plugins**, for example 2026.10.25c.
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: dropdown
+    id: banner
+    attributes:
+      label: Does the Docker page show a "Docker Locker does not support this version of Unraid" banner?
+      options:
+        - "No"
+        - "Yes"
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Browser console errors
+      description: |
+        On the **Docker** page, open your browser's developer console (usually F12, then **Console**) and paste any errors, especially ones that mention `lock.js`.
+      render: text
+  - type: textarea
+    id: other-plugins
+    attributes:
+      label: Other plugins that change the Docker page
+      description: For example, plugins that group or restyle containers.
