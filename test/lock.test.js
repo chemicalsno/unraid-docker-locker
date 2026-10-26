@@ -27,13 +27,14 @@ const CONTAINERS = [
 // dashboard: true gives a page that loads docker.js but has no container list or Update All.
 // redesigned: true gives a Docker page that no longer uses docker.js or the stock markup.
 // running: false means the Docker service is stopped.
+// path overrides the page URL's path.
 async function page({locked = [], containers = CONTAINERS, stockUpdateAll, loadBeforeReady = false,
-  dashboard = false, redesigned = false, running = true} = {}) {
+  dashboard = false, redesigned = false, running = true, path = dashboard ? 'Dashboard' : 'Docker'} = {}) {
   const stockPage = !dashboard && !redesigned;
   const dom = new JSDOM(`<!doctype html><body>${stockPage ? `
     <table><tbody id="docker_list"></tbody></table>
     <input type="button" onclick="updateAll()" value="Update All" id="updateAll">` : ''}
-  </body>`, {runScripts: 'dangerously', url: `http://tower.local/${dashboard ? 'Dashboard' : 'Docker'}`});
+  </body>`, {runScripts: 'dangerously', url: `http://tower.local/${path}`});
   const w = dom.window;
   w.eval(jquery);
   const calls = {openDocker: [], swal: [], posts: [], banners: []};
@@ -352,4 +353,15 @@ test('the Update All tooltip is cleared when nothing is locked', async () => {
   await tick(w);
   assert.equal($('#updateAll').val(), 'Update All');
   assert.equal($('#updateAll').attr('title'), '');
+});
+
+test('no warning banner on Docker subpages such as the template editor', async () => {
+  const {calls} = await page({locked: ['dev-db'], redesigned: true,
+    path: 'Docker/UpdateContainer?xmlTemplate=edit:/boot/config/plugins/dockerMan/templates-user/my-web.xml'});
+  assert.deepEqual(calls.banners, []);
+});
+
+test('warning banner on the Docker page with a trailing slash', async () => {
+  const {calls} = await page({locked: ['dev-db'], redesigned: true, path: 'Docker/'});
+  assert.equal(calls.banners.length, 1);
 });

@@ -2,7 +2,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name    "docker.locker">
 <!ENTITY author  "chemicalsno">
-<!ENTITY version "2026.10.25a">
+<!ENTITY version "2026.10.25b">
 <!ENTITY repo    "chemicalsno/unraid-docker-locker">
 <!ENTITY plgPATH "/boot/config/plugins/&name;">
 <!ENTITY emhttp  "/usr/local/emhttp/plugins/&name;">
@@ -17,6 +17,9 @@
         min="7.3.0">
 
 <CHANGES>
+###2026.10.25b
+- The unsupported-version banner no longer appears on Docker subpages such as the container template editor
+
 ###2026.10.25a
 - Update All counts every locked container, not only those with an update waiting
 - Hovering over Update All lists the locked containers it skips
@@ -209,7 +212,8 @@ echo json_encode($locked);
   // if the Docker page has changed so the hooks didn't take, locks do nothing,
   // and that must not go unnoticed
   function warnIfUnprotected() {
-    if (warned || !locked.size || !window.dockerLockerRunning || !/^\/Docker(\/|$)/.test(location.pathname)) return;
+    // only the container list: subpages such as the template editor have no Update All
+    if (warned || !locked.size || !window.dockerLockerRunning || !/^\/Docker\/?$/.test(location.pathname)) return;
     if (hooked && stockUpdateContainer) return;
     warned = true;
     var text = t('Docker Locker does not support this version of Unraid, so locked containers may still be updated from this page.');
