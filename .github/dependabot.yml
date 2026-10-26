@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /test
+    schedule:
+      interval: weekly
+    ignore:
+      # The tests must use the jQuery that Unraid bundles. The Watch Unraid
+      # workflow flags a change to it.
+      - dependency-name: jquery
