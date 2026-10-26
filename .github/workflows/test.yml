@@ -3,9 +3,6 @@ name: Test
 on:
   push:
   pull_request:
-  # Weekly, so a change in Unraid's development branch shows up before it ships.
-  schedule:
-    - cron: '17 6 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -45,32 +42,4 @@ jobs:
 
       - name: Run tests against Unraid 7.3
         working-directory: test
-        run: npm test
-
-  upstream:
-    # Only on the schedule or by hand: a change upstream shouldn't fail unrelated pushes.
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: npm
-          cache-dependency-path: test/package-lock.json
-
-      - name: Install test dependencies
-        working-directory: test
-        run: npm ci
-
-      - name: Download docker.js from Unraid's development branch
-        run: >-
-          curl -fsSL -o "$RUNNER_TEMP/docker.js"
-          https://raw.githubusercontent.com/unraid/webgui/master/emhttp/plugins/dynamix.docker.manager/javascript/docker.js
-
-      - name: Run tests against Unraid's development branch
-        working-directory: test
-        env:
-          DOCKER_JS: ${{ runner.temp }}/docker.js
         run: npm test

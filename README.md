@@ -197,7 +197,25 @@ To check the plugin against a different Unraid release, point `DOCKER_JS` at tha
 DOCKER_JS=/path/to/docker.js npm test
 ```
 
-GitHub Actions runs the tests, checks that the `.plg` is well-formed XML, and checks the PHP syntax on every push and pull request. Once a week, it also runs the tests against `docker.js` from the `master` branch of unraid/webgui, so a breaking change shows up before it reaches a stable Unraid release.
+GitHub Actions runs the tests, checks that the `.plg` is well-formed XML, and checks the PHP syntax on every push and pull request.
+
+### Watching Unraid for changes
+
+Once a week, the **Watch Unraid** workflow checks the unraid/webgui files that Docker Locker depends on, listed in `upstream/watched.json`, on the `master` branch and the newest release branch. If a file has a version that hasn't been reviewed, if code the plugin relies on is missing, or if the tests fail against that branch's `docker.js`, the workflow opens an issue that links to each change. If that issue is already open, it updates it instead.
+
+To run the check without opening an issue:
+
+```bash
+node upstream/check.mjs --dry-run
+```
+
+After you review the changes, mark the current versions as reviewed, commit `upstream/watched.json`, and close the issue:
+
+```bash
+node upstream/check.mjs --accept
+```
+
+Both commands work without a GitHub token, but GitHub then allows only 60 API requests an hour. To use your token, prefix the command with `GITHUB_TOKEN=$(gh auth token)`.
 
 Before you install a changed `.plg` file on a server, increase the `version` entity at the top of the file. The Unraid plugin installer skips a reinstall when the version doesn't change, unless you run `plugin install <file> forced`.
 

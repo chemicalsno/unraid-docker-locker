@@ -1,0 +1,95 @@
+{
+  "repo": "unraid/webgui",
+  "files": {
+    "emhttp/plugins/dynamix.docker.manager/javascript/docker.js": {
+      "anchors": [
+        "function updateAll()",
+        "d.update==1",
+        "'update_container '",
+        "function updateContainer(container)"
+      ],
+      "reviewed": [
+        "bbf8b3543d8479b914732682e465783c526cd3a6",
+        "fd8599c33724a6b5c53968056ae2c5c15d14bbcf"
+      ]
+    },
+    "emhttp/plugins/dynamix.docker.manager/DockerContainers.page": {
+      "anchors": [
+        "id=\"updateAll\"",
+        "var docker = [];",
+        "function loadlist(",
+        "/plugins/dynamix.docker.manager/include/DockerContainers.php"
+      ],
+      "reviewed": [
+        "cfa508757c4c5dfd953f136cbf96fe9dd9f37ecc",
+        "6e9f853f3a576367b003d5ca2d42fc6b5c29938a"
+      ]
+    },
+    "emhttp/plugins/dynamix.docker.manager/include/DockerContainers.php": {
+      "anchors": [
+        "<td class='updatecolumn'>",
+        "<span id='$id'",
+        "docker.push({name:'$name',id:'$id'"
+      ],
+      "reviewed": [
+        "9db665acaff1b95578b48f873de6cedcb14cb64b",
+        "c6768f5c505cefb33ecfca0e84e83833c68eae02"
+      ]
+    },
+    "emhttp/plugins/dynamix/DashStats.page": {
+      "anchors": [
+        "/plugins/dynamix.docker.manager/javascript/docker.js"
+      ],
+      "reviewed": [
+        "d5b99323039f48bc444ef7746dd27a1402eeda70"
+      ]
+    },
+    "emhttp/plugins/dynamix/include/DashboardApps.php": {
+      "anchors": [
+        "addDockerContainerContext("
+      ],
+      "reviewed": [
+        "a9e6eac04b1402c4fee1c762fcbe5a70d22555f2",
+        "53ad8efab59e7453a350578204e317c3656c5c28"
+      ]
+    },
+    "emhttp/plugins/dynamix/include/DefaultPageLayout.php": {
+      "anchors": [
+        "find_pages('Buttons')"
+      ],
+      "reviewed": [
+        "38d20044d946fc7ef46b1c31875eb1c22e67a997",
+        "c37cc22d6397382a257fb2eef4a713fde544434c"
+      ]
+    },
+    "emhttp/plugins/dynamix/include/DefaultPageLayout/HeadInlineJS.php": {
+      "anchors": [
+        "function addBannerWarning(text, warning=true, noDismiss=false"
+      ],
+      "reviewed": [
+        "5ee628f1c18c76d09508264ccb1a11779cfddba6",
+        "f8b697a55cd332d5698b1c2abc85d9c23bf78a5a"
+      ]
+    },
+    "emhttp/plugins/dynamix.plugin.manager/include/ShowPlugins.php": {
+      "anchors": [
+        "plugins/{$name}/README.md",
+        "plugin('launch',"
+      ],
+      "reviewed": [
+        "d331531032451e25c4f27cdcecb2fd4a2fc762e8",
+        "5fbbdfa6303e0f995ecd50c57bcac55e97427db3"
+      ]
+    },
+    "emhttp/plugins/dynamix.plugin.manager/scripts/plugin": {
+      "anchors": [
+        "LIBXML_NOCDATA",
+        "Type == 'base64'"
+      ],
+      "reviewed": [
+        "ab888e3fe140bb5f5e3b7caf9ebdfc227a58db5f",
+        "add045ddde5c0dc9f15aa7072a335959de6cf8e6"
+      ]
+    }
+  }
+}
